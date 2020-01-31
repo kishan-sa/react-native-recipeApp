@@ -74,7 +74,6 @@ const style = StyleSheet.create({
     },
     complexityText: {
         flex: 1,
-        backgroundColor: '',
         borderRightWidth: 0.5,
         borderColor: 'gray',
         justifyContent: 'center',
@@ -82,7 +81,6 @@ const style = StyleSheet.create({
     },
     timeText: {
         flex: 1,
-        backgroundColor: '',
         justifyContent: 'center',
         alignItems: 'center'
     }

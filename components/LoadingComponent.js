@@ -7,15 +7,12 @@ export default function LoadingComponent(props) {
             <ActivityIndicator size='large' color='red'></ActivityIndicator>
         </View>
     } else {
-        return <View>
-
-        </View>
+        return <View></View>
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'

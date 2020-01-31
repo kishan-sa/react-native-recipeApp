@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, Alert, Text, FlatList, SafeAreaView } from 'react-native'
+import { View, Alert, RefreshControl, FlatList, SafeAreaView } from 'react-native'
 import RecipeCell from './recipeCell'
 import LoadingComponent from './LoadingComponent';
 
 export default class RecipeListComponent extends Component {
 
-    state = { token: '', data: [] ,isLoading : true}
+    state = { token: '', data: [], isLoading: true, isRefreshing: false }
 
     constructor() {
         super()
@@ -45,21 +45,28 @@ export default class RecipeListComponent extends Component {
 
     render() {
         return <View style={{ flex: 1 }}>
-            
+
             <SafeAreaView>
                 <FlatList style={{ width: '100%' }}
+                    refreshControl={
+                        <RefreshControl refreshing={this.state.isRefreshing} onRefresh={() => { 
+                            this.fetchRecipeData(this.state.token); 
+                            console.log('resfrsh')
+                        }}></RefreshControl>
+                    }
                     data={this.state.data}
-                    keyExtractor={(r,i) => `${i}`}
+                    keyExtractor={(r, i) => `${i}`}
                     renderItem={(recipe) =>
                         <RecipeCell recipe={recipe.item} ></RecipeCell>
                     }
                 ></FlatList>
             </SafeAreaView>
-            <LoadingComponent isLoading = {this.state.isLoading} ></LoadingComponent>
+            <LoadingComponent isLoading={this.state.isLoading} ></LoadingComponent>
         </View>
     }
 
     fetchRecipeData(token) {
+        this.setState({isRefreshing:true,data:[],isLoading:true});
         fetch('http://35.160.197.175:3006/api/v1/recipe/cooking-list', {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -81,7 +88,7 @@ export default class RecipeListComponent extends Component {
                     }
                 })
             })
-            this.setState({isLoading:false})
+            this.setState({ isLoading: false,isRefreshing:false})
         })
     }
 }

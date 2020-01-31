@@ -36,7 +36,6 @@ export default class LoginComponent extends Component {
         </View>
     }
     onLogin = () => {
-        // Alert.alert("Login","Success")
         fetch('http://35.160.197.175:3006/api/v1/user/login',
             {
                 method: 'POST',
@@ -54,7 +53,6 @@ export default class LoginComponent extends Component {
 
                 }
             }).then((responseJSON) => {
-                console.log(responseJSON);
                 Alert.alert('Success', 'Welcome! ' + responseJSON.firstName + ' ' + responseJSON.lastName, [
                     {
                         text: 'Okay',
@@ -84,26 +82,21 @@ const styles = StyleSheet.create({
     firstContainer: {
         flex: 3,
         top: 70,
-        // backgroundColor: 'cyan',
         alignItems: 'center',
         justifyContent: 'center',
     },
     secondContainer: {
         flex: 3,
-        // backgroundColor: 'magenta',
         alignItems: 'center',
         justifyContent: 'center',
     },
     thirdContainer: {
         flex: 4,
-        // backgroundColor: 'green',
         alignItems: 'center',
-        // justifyContent: 'center',
     },
     textFieldContainer: {
         width: '100%',
         height: 180,
-        // backgroundColor:'green',
         alignItems: 'center'
     },
     commoninput: {
@@ -113,7 +106,6 @@ const styles = StyleSheet.create({
         height: 50,
         top: 10,
         borderWidth: 1,
-        // borderBottomWidth:1,
         borderColor: 'gray',
         borderRadius: 10,
     },
