@@ -50,8 +50,7 @@ export default class RecipeListComponent extends Component {
                 <FlatList style={{ width: '100%' }}
                     refreshControl={
                         <RefreshControl refreshing={this.state.isRefreshing} onRefresh={() => { 
-                            this.fetchRecipeData(this.state.token); 
-                            console.log('resfrsh')
+                            this.fetchRecipeData(this.state.token);
                         }}></RefreshControl>
                     }
                     data={this.state.data}
