@@ -1,24 +1,27 @@
 import React, { Component } from 'react'
 import { View, Alert, Text, FlatList, SafeAreaView } from 'react-native'
 import RecipeCell from './recipeCell'
+import LoadingComponent from './LoadingComponent';
 
 export default class RecipeListComponent extends Component {
 
     render() {
         return <View style={{ flex: 1 }}>
+            
             <SafeAreaView>
                 <FlatList style={{ width: '100%' }}
                     data={this.state.data}
-                    keyExtractor={(r) => r.recipeId}
+                    keyExtractor={(r,i) => `${i}`}
                     renderItem={(recipe) =>
                         <RecipeCell recipe={recipe.item} ></RecipeCell>
                     }
                 ></FlatList>
             </SafeAreaView>
+            <LoadingComponent isLoading = {this.state.isLoading} ></LoadingComponent>
         </View>
     }
 
-    state = { token: '', data: [] }
+    state = { token: '', data: [] ,isLoading : true}
 
     constructor() {
         super()
@@ -80,6 +83,7 @@ export default class RecipeListComponent extends Component {
                     }
                 })
             })
+            this.setState({isLoading:false})
             console.log(this.state)
         })
     }

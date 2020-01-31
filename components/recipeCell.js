@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import placeholder from '../assets/placeholder.jpeg'
 
 export default function RecipeCell(props) {
     return <View style={style.container}>
         <View style={style.imageContainer}>
-            <Image
-                style={style.recipeImage}
-                source={{uri: props.recipe.photo == null ? 'https://facebook.github.io/react-native/img/tiny_logo.png' : props.recipe.photo}} />
+        <Image style={style.recipeImage} source={props.recipe.photo ? {uri: props.recipe.photo} : placeholder} />
+            {/* <Image style={style.recipeImage}
+                source={{ uri: props.recipe.photo == null ? '../' : props.recipe.photo }} /> */}
             <Text style={style.chefName} >{props.recipe.firstName} {props.recipe.lastName}</Text>
         </View>
         <View style={style.detailContainer}>
