@@ -5,22 +5,6 @@ import LoadingComponent from './LoadingComponent';
 
 export default class RecipeListComponent extends Component {
 
-    render() {
-        return <View style={{ flex: 1 }}>
-            
-            <SafeAreaView>
-                <FlatList style={{ width: '100%' }}
-                    data={this.state.data}
-                    keyExtractor={(r,i) => `${i}`}
-                    renderItem={(recipe) =>
-                        <RecipeCell recipe={recipe.item} ></RecipeCell>
-                    }
-                ></FlatList>
-            </SafeAreaView>
-            <LoadingComponent isLoading = {this.state.isLoading} ></LoadingComponent>
-        </View>
-    }
-
     state = { token: '', data: [] ,isLoading : true}
 
     constructor() {
@@ -51,13 +35,28 @@ export default class RecipeListComponent extends Component {
                     ])
                 }
             }).then((responseJSON) => {
-                // console.log(responseJSON.token)
                 this.setState({
                     token: responseJSON.token
                 })
                 this.fetchRecipeData(responseJSON.token)
             }
             )
+    }
+
+    render() {
+        return <View style={{ flex: 1 }}>
+            
+            <SafeAreaView>
+                <FlatList style={{ width: '100%' }}
+                    data={this.state.data}
+                    keyExtractor={(r,i) => `${i}`}
+                    renderItem={(recipe) =>
+                        <RecipeCell recipe={recipe.item} ></RecipeCell>
+                    }
+                ></FlatList>
+            </SafeAreaView>
+            <LoadingComponent isLoading = {this.state.isLoading} ></LoadingComponent>
+        </View>
     }
 
     fetchRecipeData(token) {
@@ -68,7 +67,6 @@ export default class RecipeListComponent extends Component {
         }).then((response) => {
             return response.json()
         }).then((responseJSON) => {
-            // console.log(responseJSON)
             this.setState({
                 data: responseJSON.map(function (item) {
                     return {
@@ -84,7 +82,6 @@ export default class RecipeListComponent extends Component {
                 })
             })
             this.setState({isLoading:false})
-            console.log(this.state)
         })
     }
 }

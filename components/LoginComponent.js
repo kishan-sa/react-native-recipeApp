@@ -8,7 +8,9 @@ export default class LoginComponent extends Component {
     }
     render() {
         return <View style={styles.container}>
-            <View style={styles.firstContainer}><Text style={styles.loginText}>LOGIN</Text></View>
+            <View style={styles.firstContainer}>
+                <Text style={styles.loginText}>LOGIN</Text>
+            </View>
             <View style={styles.secondContainer}>
                 <View style={styles.textFieldContainer}>
                     <TextInput
@@ -64,7 +66,7 @@ export default class LoginComponent extends Component {
                     },
                 ])
             }
-        )
+            )
     }
 }
 
