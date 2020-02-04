@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'reac
 export default class LoginComponent extends Component {
     constructor() {
         super()
-        this.state = { email: '', password: '' }
+        this.state = { email: 'jm1@example.com', password: 'jay@123' }
     }
     render() {
         return <View style={styles.container}>
@@ -53,10 +53,14 @@ export default class LoginComponent extends Component {
 
                 }
             }).then((responseJSON) => {
+
                 Alert.alert('Success', 'Welcome! ' + responseJSON.firstName + ' ' + responseJSON.lastName, [
                     {
                         text: 'Okay',
-                        style: 'cancel'
+                        style: 'cancel',
+                        onPress: () => {
+                            this.props.navigation.navigate('List');
+                        }
                     },
                     {
                         text: 'Cancel',

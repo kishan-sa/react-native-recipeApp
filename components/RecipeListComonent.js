@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
-import { View, Alert, Text ,RefreshControl, FlatList, SafeAreaView } from 'react-native'
+import { View, Alert, Text, RefreshControl, FlatList, SafeAreaView } from 'react-native'
 import RecipeCell from './recipeCell'
 import LoadingComponent from './LoadingComponent';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 export default class RecipeListComponent extends Component {
+
+    // navigate = createStackNavigator({
+
+    // })
+    // createSwitchNavigator({
+    //     Login: { screen: LoginComponent },
+    //     List: { screen: RecipeListComponent }
+    // })
 
     state = { token: '', data: [], isLoading: true, isRefreshing: false }
 
@@ -46,22 +56,22 @@ export default class RecipeListComponent extends Component {
         return <View style={{ flex: 1 }}>
 
             <SafeAreaView>
-                <Text style={{fontWeight:'bold',fontSize:30,left:30}} >Recipe List</Text>
-                <FlatList style={{ width: '100%' ,height:500}}
+                <Text style={{ fontWeight: 'bold', fontSize: 30, left: 30 }} >Recipe List</Text>
+                <FlatList style={{ width: '100%', height: 500 }}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     refreshControl={
                         <RefreshControl refreshing={this.state.isRefreshing} onRefresh={() => {
+                            this.setState({ isRefreshing: true })
                             this.fetchRecipeData(this.state.token);
                         }}></RefreshControl>
                     }
                     data={this.state.data}
-                    
-                    // numColumns={2}
                     keyExtractor={(r, i) => `${i}`}
-                    renderItem={({item,index}) =>
+                    renderItem={({ item, index }) =>
                         <RecipeCell recipe={item} index={index} onClick={() => {
                             console.log(index);
+                            this.props.navigation.push('Login')
                         }}></RecipeCell>
                     }
                 ></FlatList>
@@ -71,7 +81,7 @@ export default class RecipeListComponent extends Component {
     }
 
     fetchRecipeData(token) {
-        this.setState({ isRefreshing: true, data: [], isLoading: true });
+        this.setState({ data: [], isLoading: true });
         fetch('http://35.160.197.175:3006/api/v1/recipe/cooking-list', {
             headers: {
                 Authorization: 'Bearer ' + token

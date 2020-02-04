@@ -17,13 +17,14 @@ export default function RecipeCell(props) {
         backgroundColor: "#0000",
     }}>
         <LinearGradient colors={((props.index) % 2) == 1 ? colors2 : colors1} style={style.gradiantContainer}>
-            <View style={{ top: 10, backgroundColor: 'rgba(255,255,255,0.5)', paddingHorizontal: 10, borderRadius: 10 }}>
+            <View style={{ top: 10, backgroundColor: 'rgba(0,0,0,0.5)', paddingHorizontal: 10, borderRadius: 10 }}>
                 <Text style={{ textAlign: 'center', color: 'white', fontWeight: '400' }}>{props.recipe.firstName} {props.recipe.lastName}</Text>
             </View>
             <Text style={style.recipeName}>{props.recipe.name}</Text>
-            <Text style={{ color: 'white', top: 40 }}>{props.recipe.complexity == '' ? 'Easy' : props.recipe.complexity}</Text>
+            <Text style={{top:35,color:'white',fontSize:20}}>Very Simple and tasty Excellent for lunch</Text>
+            {/* <Text style={{ color: 'white', top: 40 }}>{props.recipe.complexity == '' ? 'Easy' : props.recipe.complexity}</Text>
             <Text style={{ color: 'white', top: 50 }} >{props.recipe.preparationTime}</Text>
-            <Text style={{ color: 'white', top: 60 }}>{`serves : ${props.recipe.serves}`}</Text>
+            <Text style={{ color: 'white', top: 60 }}>{`serves : ${props.recipe.serves}`}</Text> */}
             <Image style={{height:30,width:30,bottom:20,left:20,position:'absolute',opacity: ((props.index) % 2) == 1 ? 0.5 : 1}} source={require('../assets/heart.png')}></Image>
         </LinearGradient>
         <View style={{ flex: 2 }}>
@@ -39,38 +40,9 @@ export default function RecipeCell(props) {
             <Image style={style.recipeImage}
                 source={props.recipe.photo ? { uri: props.recipe.photo } : placeholder} />
         </View>
-        {/* <View style={{ flex: 7, margin: 5 }}>
-            <Text style={style.chefName} ></Text>
-            
-            
-        </View> */}
 
     </View>
     </TouchableWithoutFeedback> 
-
-    // return <View style={style.container}>
-    //     <View style={style.imageContainer}>
-    // <Image
-
-    //     style={style.recipeImage}
-    //     source={props.recipe.photo ? { uri: props.recipe.photo } : placeholder}
-    // />
-    //         
-
-    //     </View>
-    //     <View style={style.detailContainer}>
-    //         
-    //         <View style={style.serves}>
-    //             
-    //         </View>
-    //         <View style={style.complexity}>
-    //             <View style={style.complexityText}>
-    //                 
-    //             </View>
-    //             <View style={style.timeText}></View>
-    //         </View>
-    //     </View>
-    // </View>
 }
 
 const style = StyleSheet.create({
@@ -82,8 +54,6 @@ const style = StyleSheet.create({
         height: Dimensions.get('window').height * 0.5,
         margin: 10,
         alignItems: 'flex-start',
-
-        // zIndex:999
     },
     container: {
         flex: 1,
@@ -136,7 +106,7 @@ const style = StyleSheet.create({
         position: 'relative'
     },
     recipeName: {
-        top: 20,
+        top: 25,
         fontWeight: 'bold',
         fontSize: 30,
         color: 'white',
