@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, Alert, TextInput, TouchableOpacity } from 'react-native';
 
 export default class LoginComponent extends Component {
     constructor() {
@@ -7,32 +7,55 @@ export default class LoginComponent extends Component {
         this.state = { email: 'jm1@example.com', password: 'jay@123' }
     }
     render() {
-        return <View style={styles.container}>
-            <View style={styles.firstContainer}>
-                <Text style={styles.loginText}>LOGIN</Text>
-            </View>
-            <View style={styles.secondContainer}>
-                <View style={styles.textFieldContainer}>
-                    <TextInput
-                        keyboardType='email-address'
-                        placeholder="Email"
-                        style={[styles.commoninput, styles.emailInput]}
-                        value={this.state.email}
-                        onChangeText={(email) => this.setState({ email })}>
-                    </TextInput>
-                    <TextInput
-                        secureTextEntry={true}
-                        placeholder="Password"
-                        style={[styles.commoninput, styles.passWordInput]}
-                        value={this.state.password}
-                        onChangeText={(password) => this.setState({ password })}>
-                    </TextInput>
-                    <TouchableOpacity style={styles.touchOpacity} onPress={this.onLogin}>
-                        <Text style={styles.buttonText}>login</Text>
+        return <View style={{ flex: 1 }}>
+            <Image
+                style={styles.topImageContainer}
+                source={require('../assets/back.jpg')} >
+            </Image>
+            <View style={{ flex: 4 }}></View>
+            <View style={styles.bottomContainer}>
+                <View style={styles.loginContainer}>
+                    <Text style={styles.logintext}>LOGIN</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.textInputContainer} >
+                        <Image style={styles.icon} source={require('../assets/user.png')} ></Image>
+                        <TextInput
+                            keyboardType='email-address'
+                            placeholder="Email"
+                            style={[styles.commoninput]}
+                            value={this.state.email}
+                            onChangeText={(email) => this.setState({ email })}>
+                        </TextInput>
+                    </View>
+                    <View style={styles.textInputContainer} >
+                        <Image style={styles.icon} source={require('../assets/key.png')} ></Image>
+                        <TextInput
+                            secureTextEntry={true}
+                            placeholder="Password"
+                            style={[styles.commoninput]}
+                            value={this.state.password}
+                            onChangeText={(password) => this.setState({ password })}>
+                        </TextInput>
+                    </View>
+                    <TouchableOpacity style={{ alignSelf: 'flex-end', }}>
+                        <Text style={styles.forgotText} >Forgot Password?</Text>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.loginButton} onPress={() => {
+                        this.onLogin()
+                    }}>
+                        <Text style={{ fontSize: 25, color: 'white' }} >LOGIN</Text>
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', top: 10 }}>
+                        <Text style={{ fontSize: 17 }}>You have an account? </Text>
+                        <TouchableOpacity>
+                            <Text style={{ color: 'rgba(250,144,68,1)', fontSize: 17 }}>signup</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-            <View style={styles.thirdContainer}><Text>Forgot Password ?</Text></View>
         </View>
     }
     onLogin = () => {
@@ -59,7 +82,7 @@ export default class LoginComponent extends Component {
                         text: 'Okay',
                         style: 'cancel',
                         onPress: () => {
-                            this.props.navigation.navigate('List');
+                            this.props.navigation.navigate('List',{token:responseJSON.token});
                         }
                     },
                     {
@@ -67,70 +90,76 @@ export default class LoginComponent extends Component {
                         style: 'destructive'
                     },
                 ])
-            }
-            )
+            })
     }
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'lightgray',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-    },
-    loginText: {
-        fontSize: 30
-    },
-    firstContainer: {
-        flex: 3,
-        top: 70,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    secondContainer: {
-        flex: 3,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    thirdContainer: {
-        flex: 4,
-        alignItems: 'center',
-    },
-    textFieldContainer: {
-        width: '100%',
-        height: 180,
-        alignItems: 'center'
-    },
     commoninput: {
+        alignSelf: 'center',
+        flex: 1,
         backgroundColor: 'white',
         width: '80%',
-        paddingLeft: 10,
+        paddingLeft: 20,
+        fontSize: 20
+    },
+    topImageContainer: {
+        flex: 0.6,
+        position: 'absolute',
+        height: 500,
+        width: '100%'
+    },
+    bottomContainer: {
+        flex: 6,
+        backgroundColor: 'white',
+        borderTopEndRadius: 40,
+        borderTopLeftRadius: 40,
+        paddingHorizontal: 30,
+        alignItems: 'center'
+    },
+    loginContainer: {
+        flex: 1,
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center'
+    },
+    logintext: {
+        textAlign: 'center',
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+    textInputContainer: {
         height: 50,
-        top: 10,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 10,
+        width: '100%',
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
-    emailInput: {
-
+    icon: {
+        aspectRatio: 1,
+        height: 30,
+        width: 30,
+        alignSelf: 'center',
+        tintColor: 'rgba(250,144,68,1)'
     },
-    passWordInput: {
-        top: 20
-    },
-    touchOpacity: {
-        borderRadius: 50,
-        top: 40,
+    loginButton: {
+        backgroundColor: 'rgba(250,144,68,1)',
         height: 50,
         width: '80%',
-        backgroundColor: 'rgb(255, 74, 0)',
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 20,
-        fontWeight: 'bold'
+    forgotText: {
+        top: 20,
+        fontSize: 18
+    },
+    buttonContainer: {
+        flex: 1,
+        height: '100%',
+        width: '100%',
+        alignItems: 'center'
     }
 });
