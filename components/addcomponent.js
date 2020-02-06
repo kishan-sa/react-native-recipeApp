@@ -3,6 +3,8 @@ import { View } from 'react-native';
 
 export default class AddRecipeComponent extends Component {
     render(){
-        return <View style={{flex:1,backgroundColor:'green'}}></View>
+        return <View style={{flex:1,backgroundColor:'red'}}>
+
+        </View>
     }
 }

@@ -2,25 +2,26 @@ import LoginComponent from './components/LoginComponent';
 import React, { Component } from 'react'
 import { Image } from 'react-native';
 
-import RecipeListComponent from './components/RecipeListComonent';
+import CookingListComponent from './components/CookingListComponent';
 import CookingDetailComponent from './components/CookingDetailComponent';
 import AddRecipeComponent from './components/addcomponent';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
 import { createTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
+import RecipeListComponent from './components/RecipeListComponent';
 
 const tabbarNavigator = createBottomTabNavigator({
   List: {
-    screen: RecipeListComponent, navigationOptions: {
+    screen: CookingListComponent, navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
         <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/cooking.png')}></Image>
       ),
       title: 'Cooking List'
     }
   },
-  Add: {
-    screen: AddRecipeComponent, navigationOptions: {
+  RecipeList: {
+    screen: RecipeListComponent, navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
         <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/grid.png')}></Image>
       ),
