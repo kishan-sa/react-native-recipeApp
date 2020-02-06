@@ -1,25 +1,45 @@
 import LoginComponent from './components/LoginComponent';
+import React, { Component } from 'react'
+import { Image } from 'react-native';
+
 import RecipeListComponent from './components/RecipeListComonent';
-import RecipeDetailComponent from './components/RecipeDetailComponent';
+import CookingDetailComponent from './components/CookingDetailComponent';
 import AddRecipeComponent from './components/addcomponent';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
+import { createTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
 
-
-const detailNavigation = createStackNavigator(
-  {
-    List: { screen: RecipeListComponent },
-    Detail: { screen: RecipeDetailComponent },
-    Add: { screen: AddRecipeComponent, navigationOptions: { ...TransitionPresets.ModalSlideFromBottomIOS } }
+const tabbarNavigator = createBottomTabNavigator({
+  List: {
+    screen: RecipeListComponent, navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/cooking.png')}></Image>
+      ),
+      title: 'Cooking List'
+    }
   },
-  {
-    mode: 'card',
-    defaultNavigationOptions: {
-      headerShown: false
-    },
+  Add: {
+    screen: AddRecipeComponent, navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/grid.png')}></Image>
+      ),
+      title: 'Recipe List'
+    }
   }
-)
+}, {
+  tabBarOptions: {
+    activeTintColor: 'rgba(252,182,107,1)',
+  }
+})
+
+const detailNavigation = createStackNavigator({
+  tabbarNavigator,
+  Detail: { screen: CookingDetailComponent },
+  Add: { screen: AddRecipeComponent, navigationOptions: { ...TransitionPresets.ModalPresentationIOS } }
+}, {
+  headerMode: "none"
+});
 
 const navigate = createSwitchNavigator(
   {

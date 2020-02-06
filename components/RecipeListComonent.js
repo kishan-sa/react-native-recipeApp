@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component , PureComponent} from 'react'
 import { Dimensions } from 'react-native';
-import { View, Alert, Text, RefreshControl, FlatList, SafeAreaView , Button} from 'react-native'
+import { View, Text, RefreshControl, FlatList, SafeAreaView, Button, Image, TextInput ,TouchableOpacity} from 'react-native'
 import RecipeCell from './recipeCell'
 import LoadingComponent from './LoadingComponent';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { StackActions } from 'react-navigation';
 
-export default class RecipeListComponent extends Component {
+export default class RecipeListComponent extends PureComponent {
 
     state = { token: '', data: [], isLoading: true, isRefreshing: false }
 
@@ -16,12 +13,29 @@ export default class RecipeListComponent extends Component {
     }
 
     render() {
-        return <View style={{ flex: 1 }}>
-
+        return <View style={{ flex: 1, backgroundColor: 'white' }}>
             <SafeAreaView>
-                <View><Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Recipe List</Text></View>
+                <View style={{ top: 20 }}><Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Cooking List</Text></View>
+                <View style={{ height: 50, backgroundColor: 'rgba(240,240,240,1)', top: 30, width: '80%', left: 30, borderRadius: 30, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 10 }}>
+                    <Image style={{ width: 20, aspectRatio: 1, alignSelf: 'center', tintColor:'gray' }} source={require('../assets/search.png')}></Image>
+                    <View style={{ flex: 9 }}>
+                        <TextInput
+                            keyboardType='email-address'
+                            placeholder='Search your recipes here...'
+                            style={{
+                                alignSelf: 'center',
+                                flex: 1,
+                                width: '100%',
+                                left: 10,
+                                fontSize: 15
+                            }}
+                            value={this.state.email}
+                            onChangeText={(email) => this.setState({ email })}>
+                        </TextInput>
+                    </View>
+                </View>
 
-                <FlatList style={{ width: '100%', height: Dimensions.get('window').height * 0.58, }}
+                <FlatList style={{ width: '100%', top: 30, height: Dimensions.get('window').height * 0.58, }}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     refreshControl={
@@ -34,16 +48,22 @@ export default class RecipeListComponent extends Component {
                     keyExtractor={(r, i) => `${i}`}
                     renderItem={({ item, index }) =>
                         <RecipeCell recipe={item} index={index} onClick={() => {
-                            console.log(index);
-                            // this.props.navigation.dispatch( this.pushAction );
                             this.props.navigation.push('Detail', { index: index, recipe: item })
                         }}></RecipeCell>
                     }
                 ></FlatList>
-                <Button title={'add'} onPress={() => {
-                    console.log('in')
+                <Text style={{fontSize:20,paddingHorizontal:30,top:20,textAlign:'center'}}>Have any unique recipe?</Text>
+                <View style={{}}></View>
+                <TouchableOpacity style={{top:30,backgroundColor:'rgba(246,145,115,1)',width:'80%',height:50,alignSelf:'center',justifyContent:'center',alignItems:'center',borderRadius:10}} onPress={() => {
+                    console.log('add')
                     this.props.navigation.push('Add')
-                }} ></Button>
+                        // this.onLogin()
+                    }}>
+                        <Text style={{ fontSize: 25, color: 'white',justifyContent:'center'}} >ADD</Text>
+                    </TouchableOpacity>
+                {/* <Button title={'add'} onPress={() => {
+                    this.props.navigation.push('Add')
+                }} ></Button> */}
             </SafeAreaView>
             <LoadingComponent isLoading={this.state.isLoading} ></LoadingComponent>
         </View>

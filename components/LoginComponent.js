@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, Image, Alert, TextInput, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, Image, Alert, TextInput, TouchableOpacity } from 'react-native';
 export default class LoginComponent extends Component {
     constructor() {
         super()
@@ -10,7 +9,7 @@ export default class LoginComponent extends Component {
         return <View style={{ flex: 1 }}>
             <Image
                 style={styles.topImageContainer}
-                source={require('../assets/back.jpg')} >
+                source={require('../assets/background.jpg')} >
             </Image>
             <View style={{ flex: 4 }}></View>
             <View style={styles.bottomContainer}>
