@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, RefreshControl, FlatList, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { View, Alert, Text, RefreshControl, FlatList, SafeAreaView, Image, TouchableOpacity ,Platform, StatusBar} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { color } from 'react-native-reanimated';
 
@@ -23,15 +23,15 @@ export default class CookingDetailComponent extends Component {
             <LinearGradient colors={this.state.index % 2 == 1 ? this.colors2 : this.colors1} style={{ flex: 0.5, position: 'absolute', height: 500, width: '100%' }}></LinearGradient>
             <View style={{ flex: 4, /*backgroundColor: 'red' */ }}>
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ flex: 1, /*backgroundColor: 'white'*/ }}>
-                        <View style={{ flex: 15, flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <TouchableOpacity style={{ marginLeft: 30 }} onPress={() => {
+                    <View style={{ flex: 1, /*backgroundColor: 'white'*/  paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
+                        <View style={{ flex: 15, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center' }}>
+                            <TouchableOpacity style={{ marginLeft: 20 }} onPress={() => {
                                 this.props.navigation.pop()
                             }}>
                                 <Image style={{ width: 30, height: 30, tintColor: 'white' }} source={require('../assets/back.png')} ></Image>
                             </TouchableOpacity>
                             <TouchableOpacity>
-                                <Image style={{ width: 25, height: 25, marginRight: 30 }} source={require('../assets/heart.png')}></Image>
+                                <Image style={{ width: 25, height: 25, marginRight: 20 }} source={require('../assets/heart.png')}></Image>
                             </TouchableOpacity>
 
                         </View>
@@ -44,6 +44,9 @@ export default class CookingDetailComponent extends Component {
             </View>
             <View style={{ flex: 6, backgroundColor: 'white', borderTopEndRadius: 40, borderTopLeftRadius: 40, paddingHorizontal: 30 }}>
                 <Text style={{ fontSize: 30, top: 20, fontWeight: '600' }} >{this.state.recipe.name}</Text>
+                        <View style={{height:20,backgroundColor:'rgba(255,0,0,0.2)',top:20,alignSelf:'flex-start',paddingHorizontal:10,borderRadius:20}}>
+                        <Text style={{color:'red'}}>{this.state.recipe.firstName} {this.state.recipe.lastName}</Text>
+                        </View>
                 <View style={{ height: 80, width: '100%', top: 30, flexDirection: 'row' }} >
                     <View style={{ flex: 1, backgroundColor: 'rgba(240,240,240,1)', margin: 5, borderRadius: 10, alignContent: 'center', paddingVertical: 10, justifyContent: 'space-evenly' }}>
                         <Text style={{ textAlign: 'center', color: 'gray' }}>Complexity</Text>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { View, Text, StyleSheet, Image, Button, TouchableWithoutFeedback } from 'react-native'
-import placeholder from '../assets/placeholder.jpeg'
+import placeholder from '../assets/place.png'
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function RecipeCell(props) {
@@ -32,11 +32,12 @@ export default function RecipeCell(props) {
             </View>
             <View style={{
             shadowOffset: { height: 10, width: -20 },
-            elevation: 3,
             shadowRadius: 15,
             overflow: 'visible',
             shadowOpacity: 0.6,
-            backgroundColor: "#0000",
+            backgroundColor:'#0000',
+            shadowColor:'black',
+            elevation:20,
         }}>
             <Image style={style.recipeImage}
                 source={props.recipe.photo ? { uri: props.recipe.photo } : placeholder} />
@@ -55,6 +56,8 @@ const style = StyleSheet.create({
         height: Dimensions.get('window').height * 0.5,
         margin: 10,
         alignItems: 'flex-start',
+        elevation:20,
+        backgroundColor:'#0000'
     },
     container: {
         flex: 1,
@@ -86,9 +89,8 @@ const style = StyleSheet.create({
         justifyContent: 'space-between',
     },
     recipeImage: {
-        aspectRatio: 1,
         borderRadius: 500,
-        // height: 200,
+        width:Dimensions.get('window').height * 0.25 <= 170 ? 130 : 200,
         height: Dimensions.get('window').height * 0.25 <= 170 ? 130 : 200,
         position: 'absolute',
         bottom: Dimensions.get('window').height * 0.065,

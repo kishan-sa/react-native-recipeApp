@@ -36,7 +36,7 @@ const tabbarNavigator = createBottomTabNavigator({
 
 const detailNavigation = createStackNavigator({
   tabbarNavigator,
-  Detail: { screen: CookingDetailComponent },
+  Detail: { screen: CookingDetailComponent , navigationOptions:{ ...TransitionPresets.SlideFromRightIOS}},
   Add: { screen: AddRecipeComponent, navigationOptions: { ...TransitionPresets.ModalPresentationIOS } }
 }, {
   headerMode: "none"

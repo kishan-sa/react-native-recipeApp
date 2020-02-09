@@ -8,11 +8,6 @@ export default class RecipeListComponent extends Component {
 
     state = { token: '', data: [], isLoading: false, isRefreshing: false }
 
-    componentDidMount() {
-        console.log(this.props.navigation)
-        // this.fetchRecipeData(this.props)
-    }
-
     render() {
         return <View style={{ flex: 1, backgroundColor: 'white' }}>
             <SafeAreaView>
