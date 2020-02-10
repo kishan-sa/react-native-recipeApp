@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, RefreshControl, FlatList, SafeAreaView, Image, TouchableOpacity ,Platform, StatusBar} from 'react-native';
+import { View,Text, SafeAreaView, Image, TouchableOpacity ,Platform, StatusBar} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { color } from 'react-native-reanimated';
+import placeholder from '../assets/place.png'
 
 export default class CookingDetailComponent extends Component {
 
@@ -21,9 +21,9 @@ export default class CookingDetailComponent extends Component {
     render() {
         return <View style={{ flex: 1 }}>
             <LinearGradient colors={this.state.index % 2 == 1 ? this.colors2 : this.colors1} style={{ flex: 0.5, position: 'absolute', height: 500, width: '100%' }}></LinearGradient>
-            <View style={{ flex: 4, /*backgroundColor: 'red' */ }}>
+            <View style={{ flex: 4 }}>
                 <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ flex: 1, /*backgroundColor: 'white'*/  paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
+                    <View style={{ flex: 1,paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
                         <View style={{ flex: 15, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center' }}>
                             <TouchableOpacity style={{ marginLeft: 20 }} onPress={() => {
                                 this.props.navigation.pop()
@@ -35,9 +35,9 @@ export default class CookingDetailComponent extends Component {
                             </TouchableOpacity>
 
                         </View>
-                        <View style={{ flex: 85, alignSelf: 'center', justifyContent: 'center' /*backgroundColor: 'red'*/ }}>
+                        <View style={{ flex: 85, alignSelf: 'center', justifyContent: 'center' }}>
                             <Image style={{ flex: 1, aspectRatio: 1, borderRadius: 500, bottom: 20 }}
-                                source={{ uri: this.state.recipe.photo }}></Image>
+                                source={this.state.recipe.photo ? { uri: this.state.recipe.photo } : placeholder}></Image>
                         </View>
                     </View>
                 </SafeAreaView>

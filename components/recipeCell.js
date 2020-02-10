@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
-import { View, Text, StyleSheet, Image, Button, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import placeholder from '../assets/place.png'
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -22,9 +22,6 @@ export default function RecipeCell(props) {
                 </View>
                 <Text style={style.recipeName}>{props.recipe.name}</Text>
                 <Text style={{ top: 35, color: 'white', fontSize: 20 }}>Very Simple and tasty Excellent for lunch</Text>
-                {/* <Text style={{ color: 'white', top: 40 }}>{props.recipe.complexity == '' ? 'Easy' : props.recipe.complexity}</Text>
-            <Text style={{ color: 'white', top: 50 }} >{props.recipe.preparationTime}</Text>
-            <Text style={{ color: 'white', top: 60 }}>{`serves : ${props.recipe.serves}`}</Text> */}
                 <Image style={{ height: 30, width: 30, bottom: 20, left: 20, position: 'absolute', opacity: ((props.index) % 2) == 1 ? 0.5 : 1 }} source={require('../assets/heart.png')}></Image>
                 
             </LinearGradient>

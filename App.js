@@ -9,7 +9,7 @@ import AddRecipeComponent from './components/addcomponent';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
 import { createTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
-import RecipeListComponent from './components/RecipeListComponent';
+import SettingComponent from './components/SettingComponent';
 
 const tabbarNavigator = createBottomTabNavigator({
   List: {
@@ -21,11 +21,11 @@ const tabbarNavigator = createBottomTabNavigator({
     }
   },
   RecipeList: {
-    screen: RecipeListComponent, navigationOptions: {
+    screen: SettingComponent, navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/grid.png')}></Image>
+        <Image style={{ height: 20, width: 20, tintColor: tintColor }} source={require('./assets/settings.png')}></Image>
       ),
-      title: 'Recipe List'
+      title: 'Settings'
     }
   }
 }, {

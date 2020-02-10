@@ -4,33 +4,14 @@ import { View, Text, RefreshControl, FlatList, SafeAreaView, Button, Image, Text
 import RecipeCell from './recipeCell'
 import LoadingComponent from './LoadingComponent';
 
-export default class RecipeListComponent extends Component {
+export default class SettingComponent extends Component {
 
     state = { token: '', data: [], isLoading: false, isRefreshing: false }
 
     render() {
         return <View style={{ flex: 1, backgroundColor: 'white' }}>
             <SafeAreaView>
-                <View style={{ top: 20 }}><Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Cooking List</Text></View>
-                <View style={{ height: 50, backgroundColor: 'rgba(240,240,240,1)', top: 30, width: '80%', left: 30, borderRadius: 30, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 10 }}>
-                    <Image style={{ width: 20, aspectRatio: 1, alignSelf: 'center', tintColor:'gray' }} source={require('../assets/search.png')}></Image>
-                    <View style={{ flex: 9 }}>
-                        <TextInput
-                            keyboardType='email-address'
-                            placeholder='Search your recipes here...'
-                            style={{
-                                alignSelf: 'center',
-                                flex: 1,
-                                width: '100%',
-                                left: 10,
-                                fontSize: 15
-                            }}
-                            value={this.state.email}
-                            onChangeText={(email) => this.setState({ email })}>
-                        </TextInput>
-                    </View>
-                </View>
-
+                <View style={{ top: 20 }}><Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Settings</Text></View>
                 <FlatList style={{ width: '100%', top: 30, height: Dimensions.get('window').height * 0.58, }}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
