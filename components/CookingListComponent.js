@@ -65,7 +65,7 @@ class CookingListComponent extends PureComponent {
                                     keyExtractor={(r, i) => `${i}`}
                                     renderItem={({ item, index }) =>
                                         <RecipeCell recipe={item} index={index} onClick={() => {
-                                            this.props.navigation.push('Detail', { index: index, recipe: item })
+                                            this.props.navigation.push('Detail', { index: index, recipe: item.recipeId })
                                         }}></RecipeCell>
                                     }
                                 ></FlatList>
