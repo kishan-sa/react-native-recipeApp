@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Image, Alert, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Alert, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 class LoginComponent extends Component {
@@ -83,7 +83,7 @@ class LoginComponent extends Component {
                         style: 'cancel',
                         onPress: () => {
                             this.props.token(responseJSON.token)
-                            this.props.navigation.navigate('List', { token: responseJSON.token });
+                            this.props.navigation.navigate('List')
                         }
                     },
                     {

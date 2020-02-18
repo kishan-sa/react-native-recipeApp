@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { View,Text, SafeAreaView, Image, TouchableOpacity ,Platform, StatusBar} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import React, { Component } from 'react'
+import { View,Text, SafeAreaView, Image, TouchableOpacity ,Platform, StatusBar} from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 import placeholder from '../assets/place.png'
 
 export default class CookingDetailComponent extends Component {

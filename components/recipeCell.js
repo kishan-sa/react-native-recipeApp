@@ -1,12 +1,12 @@
 import React from 'react'
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import placeholder from '../assets/place.png'
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient'
 
 export default function RecipeCell(props) {
     const colors1 = ['rgba(252,182,107,1)', 'rgba(250,144,68,1)']
-    const colors2 = ['rgba(111,183,221,1)', 'rgba(69,141,198,193)']
+    const colors2 = ['rgba(111,183,221,1)', 'rgba(69,141,198,1)']
     return <TouchableWithoutFeedback onPress={() => { props.onClick() }}>
         <View style={{
             margin: 10, width: Dimensions.get('window').width * 0.8, flexDirection: 'row', shadowColor: 'black',

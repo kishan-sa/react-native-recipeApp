@@ -1,9 +1,8 @@
-import React, { Component, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Dimensions } from 'react-native'
-import { View, Text, RefreshControl, FlatList, SafeAreaView, Button, Image, TextInput, TouchableOpacity, Platform, StatusBar } from 'react-native'
+import { View, Text, RefreshControl, FlatList, SafeAreaView, Image, TextInput, TouchableOpacity, Platform, StatusBar } from 'react-native'
 import RecipeCell from './recipeCell'
 import LoadingComponent from './LoadingComponent'
-import { TabBar } from 'react-native-tab-view'
 import placeholder from '../assets/place.png'
 import { connect } from 'react-redux'
 
