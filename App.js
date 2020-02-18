@@ -1,5 +1,5 @@
 import LoginComponent from './components/LoginComponent';
-import React, { Component } from 'react'
+import React from 'react'
 import { Image } from 'react-native';
 
 import CookingListComponent from './components/CookingListComponent';
@@ -8,8 +8,11 @@ import AddRecipeComponent from './components/addcomponent';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
-import { createTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SettingComponent from './components/SettingComponent';
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 const tabbarNavigator = createBottomTabNavigator({
   List: {
@@ -36,7 +39,7 @@ const tabbarNavigator = createBottomTabNavigator({
 
 const detailNavigation = createStackNavigator({
   tabbarNavigator,
-  Detail: { screen: CookingDetailComponent , navigationOptions:{ ...TransitionPresets.SlideFromRightIOS}},
+  Detail: { screen: CookingDetailComponent, navigationOptions: { ...TransitionPresets.SlideFromRightIOS } },
   Add: { screen: AddRecipeComponent, navigationOptions: { ...TransitionPresets.ModalPresentationIOS } }
 }, {
   headerMode: "none"
@@ -51,6 +54,23 @@ const navigate = createSwitchNavigator(
   }
 )
 
-const App = createAppContainer(navigate);
+const AppContainer = createAppContainer(navigate);
 
-export default App;
+const initialState = { token: '' };
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'Token':
+      return { token: action.token }
+    default: { token: state.token }
+  }
+  return { token: state.token }
+}
+
+const store = createStore(reducer)
+
+export default function App() {
+  return <Provider store={store}>
+    <AppContainer />
+  </Provider>
+}

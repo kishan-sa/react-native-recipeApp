@@ -50,7 +50,7 @@ export default class AddRecipeComponent extends Component {
     render() {
         return <View style={{ flex: 1 }}>
             <View style={{ height: 50, width: '100%', flexDirection: 'row', alignItems: 'center' }} >
-                <TouchableOpacity style={{height:30,width:30,left: 20}} onPress={() => {
+                <TouchableOpacity style={{height:30,width:30,marginLeft: 20}} onPress={() => {
                     this.props.navigation.pop()
                 }}>
                     <Image style={{ height: 30, width: 30, tintColor: 'black' }} source={require('../assets/down.png')}></Image>
@@ -152,7 +152,7 @@ export default class AddRecipeComponent extends Component {
                         onChangeText={(serves) => this.setState({ serves: serves })}>
                     </TextInput>
                 </View>
-                <Text style={{ marginTop: 20, fontSize: 20 }}>select Complexity</Text>
+                <Text style={{ marginTop: 20, fontSize: 20 }}>Select Complexity</Text>
                 <View style={{ height: 30, width: '80%', marginVertical: 20, flexDirection: 'row', justifyContent: 'space-evenly' }}>
                     <TouchableOpacity style={{ flex: 1, backgroundColor: this.state.selectedComplexity == 'Easy' ? 'rgba(250,144,68,1)' : 'rgba(0,0,0,0.5)', justifyContent: 'center', borderRadius: 10, marginHorizontal: 10 }} onPress={() => {
                         this.setState({ selectedComplexity: 'Easy' })
@@ -221,7 +221,15 @@ export default class AddRecipeComponent extends Component {
             body: formData
         }).then((responseJson) => {
             this.setState({isLoading:false})
-            Alert.alert('Success','Recipe added')
+            Alert.alert('Success','Recipe added',[
+                {
+                    text: 'Okay',
+                    style: 'cancel',
+                    onPress: () => {
+                        this.props.navigation.pop()
+                    }
+                }
+            ])
           }).catch((error) => {
             this.setState({isLoading:false})
             Alert.alert('Fail','Failed to add recipe')

@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { Dimensions } from 'react-native';
-import { View, Text, RefreshControl, FlatList, SafeAreaView, Button, Image, TextInput ,TouchableOpacity} from 'react-native'
+import { View, Text, RefreshControl, FlatList, SafeAreaView } from 'react-native'
 import RecipeCell from './recipeCell'
-import LoadingComponent from './LoadingComponent';
-
-export default class SettingComponent extends Component {
+import LoadingComponent from './LoadingComponent'
+import { connect } from 'react-redux'
+class SettingComponent extends Component {
 
     state = { token: '', data: [], isLoading: false, isRefreshing: false }
 
     render() {
         return <View style={{ flex: 1, backgroundColor: 'white' }}>
             <SafeAreaView>
-                <View style={{ top: 20 }}><Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Settings</Text></View>
+                <View style={{ top: 20 }}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Settings</Text>
+                </View>
                 <FlatList style={{ width: '100%', top: 30, height: Dimensions.get('window').height * 0.58, }}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
@@ -29,7 +31,6 @@ export default class SettingComponent extends Component {
                         }}></RecipeCell>
                     }
                 ></FlatList>
-                
             </SafeAreaView>
             <LoadingComponent isLoading={this.state.isLoading} ></LoadingComponent>
         </View>
@@ -62,3 +63,9 @@ export default class SettingComponent extends Component {
         })
     }
 }
+
+const mapStateToProps = (state) => {
+    return { token: state.token }
+}
+
+export default connect(mapStateToProps)(SettingComponent)

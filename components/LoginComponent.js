@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Image, Alert, TextInput, TouchableOpacity } from 'react-native';
-export default class LoginComponent extends Component {
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+class LoginComponent extends Component {
     constructor() {
         super()
-        this.state = { email: 'jm1@example.com', password: 'jay@123' }
+        this.state = { email: 'jm1@example.com', password: 'jay@123', token: '' }
     }
     render() {
         return <View style={{ flex: 1 }}>
@@ -75,13 +77,13 @@ export default class LoginComponent extends Component {
 
                 }
             }).then((responseJSON) => {
-
                 Alert.alert('Success', 'Welcome! ' + responseJSON.firstName + ' ' + responseJSON.lastName, [
                     {
                         text: 'Okay',
                         style: 'cancel',
                         onPress: () => {
-                            this.props.navigation.navigate('List',{token:responseJSON.token});
+                            this.props.token(responseJSON.token)
+                            this.props.navigation.navigate('List', { token: responseJSON.token });
                         }
                     },
                     {
@@ -162,3 +164,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
+
+function mapDispatchToProps(dispatch) {
+    return {
+        token: (value) => dispatch({
+            type: 'Token',
+            token: value
+        })
+    }
+}
+
+const mapStateToProps = (state) => {
+    return { token: state.token }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent)

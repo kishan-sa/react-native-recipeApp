@@ -1,12 +1,13 @@
-import React, { Component ,PureComponent } from 'react'
-import { Dimensions } from 'react-native';
+import React, { Component, PureComponent } from 'react'
+import { Dimensions } from 'react-native'
 import { View, Text, RefreshControl, FlatList, SafeAreaView, Button, Image, TextInput, TouchableOpacity, Platform, StatusBar } from 'react-native'
 import RecipeCell from './recipeCell'
-import LoadingComponent from './LoadingComponent';
-import { TabBar } from 'react-native-tab-view';
+import LoadingComponent from './LoadingComponent'
+import { TabBar } from 'react-native-tab-view'
 import placeholder from '../assets/place.png'
+import { connect } from 'react-redux'
 
-export default class CookingListComponent extends PureComponent {
+class CookingListComponent extends PureComponent {
 
     image = <Image style={{ height: 12, width: 12, tintColor: 'rgba(255,255,255,0.8)', marginRight: 3 }} source={require('../assets/star.png')}></Image>
 
@@ -15,8 +16,8 @@ export default class CookingListComponent extends PureComponent {
     }
 
     componentDidMount() {
-        this.fetchCookingData(this.props.navigation.state['params']['token'])
-        this.setState({ token: this.props.navigation.state['params']['token'] })
+        this.fetchCookingData(this.props.token)
+        this.setState({ token: this.props.token })
     }
 
     render() {
@@ -40,7 +41,7 @@ export default class CookingListComponent extends PureComponent {
                     </View>
                 </View>
                 <FlatList
-                initialNumToRender={5}
+                    initialNumToRender={5}
                     extraData={this.state}
                     refreshControl={
                         <RefreshControl refreshing={this.state.isRefreshing} onRefresh={() => {
@@ -73,7 +74,7 @@ export default class CookingListComponent extends PureComponent {
                                     <Text style={{ fontWeight: 'bold', fontSize: 40, left: 30 }} >Recipe List</Text>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            this.props.navigation.push('Add', { token: this.props.navigation.state['params']['token'] })
+                                            this.props.navigation.push('Add', { token: this.props.token })
                                         }}
                                         style={{ height: 40, backgroundColor: 'rgba(250,144,68,1)', right: 20, justifyContent: 'center', position: 'absolute', borderRadius: 30, paddingHorizontal: 10, top: 10 }}><Text style={{ color: 'white', fontWeight: 'bold' }}>Add more</Text></TouchableOpacity>
                                 </View>
@@ -186,8 +187,13 @@ export default class CookingListComponent extends PureComponent {
 
             }
         }).then((responseJSON) => {
-            // this.setState({recipeData:[],data:[]})
             this.fetchCookingData(this.state.token)
         })
     }
 }
+
+const mapStateToProps = (state) => {
+    return { token: state.token }
+}
+
+export default connect(mapStateToProps)(CookingListComponent)
