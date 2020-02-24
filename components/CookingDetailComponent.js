@@ -97,29 +97,39 @@ class CookingDetailComponent extends Component {
     }
 
     renderIngredients() {
-        const fields = [];
+        const ingredients = [];
         this.state.recipe.ingredients.forEach(element => {
-            fields.push(
+            ingredients.push(
                 <View style={{ width: '100%', marginVertical: 5, flexDirection: 'row' }}>
                     <Image style={{ height: 20, width: 20, tintColor: 'rgba(250,144,68,1)' }} source={require('../assets/ingredients.png')}></Image>
                     <Text style={{ marginLeft: 10 }}>{element.ingredient}</Text>
                 </View>
             )
         })
-        return fields
+        if (ingredients.length == 0){
+            ingredients.push(
+                <Text>No Ingredients available</Text>
+            )
+        }
+        return ingredients
     }
 
     renderInstrucions() {
-        const fields = [];
+        const instructions = [];
         this.state.recipe.instructions.forEach(element => {
-            fields.push(
+            instructions.push(
                 <View style={{ width: '100%', marginVertical: 5, flexDirection: 'row' }}>
                     <Image style={{ height: 20, width: 20, tintColor: 'rgba(250,144,68,1)' }} source={require('../assets/spoon.png')}></Image>
                     <Text style={{ marginLeft: 10 }}>{element.instruction}</Text>
                 </View>
             )
         })
-        return fields
+        if (instructions.length == 0){
+            instructions.push(
+                <Text>No Instrucions available</Text>
+            )
+        }
+        return instructions
     }
 
     fetchCookingData() {

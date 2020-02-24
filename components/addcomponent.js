@@ -38,8 +38,6 @@ export default class AddRecipeComponent extends Component {
             quality: 1
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             this.setState({ image: result.uri });
         } else {
@@ -166,8 +164,6 @@ export default class AddRecipeComponent extends Component {
                 </View>
 
                 <TouchableOpacity onPress={() => {
-                    console.log(this.state)
-                    console.log(this.props)
                     this.addRecipe()
                 }} style={{ height: 50, width: '60%', backgroundColor: 'rgba(250,144,68,1)', bottom: 60, position: 'absolute', justifyContent: 'center', alignItems: 'center', borderRadius: 30 }}><Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Add</Text></TouchableOpacity>
             </View>
@@ -197,7 +193,6 @@ export default class AddRecipeComponent extends Component {
                 console.log('Error')
             }
         }).then((responseJSON) => {
-            console.log(responseJSON)
             this.uploadImage(responseJSON.id)
         })
     }

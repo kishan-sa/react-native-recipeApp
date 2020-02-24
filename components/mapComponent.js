@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView ,TouchableOpacity,Image} from 'react-native'
-import MapView, { Marker, Polyline } from 'react-native-maps'
+import { View ,TouchableOpacity,Image} from 'react-native'
+import MapView, { Marker, Polyline , PROVIDER_GOOGLE } from 'react-native-maps'
 import * as Permission from 'expo-permissions'
+import SafeAreaView from 'react-native-safe-area-view';
 
 export default class mapComponent extends Component {
     constructor() {
@@ -19,8 +20,8 @@ export default class mapComponent extends Component {
     }
 
     render() {
-        return <View style={{ flex: 1 }}>
-            <SafeAreaView style={{ flex: 1 }}>
+         return <View style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }} forceInset={{bottom:'never'}} >
                 <View style={{ height: 50, width: '100%' }}>
                 <TouchableOpacity style={{ marginLeft: 20 }} onPress={() => {
                                 this.props.navigation.pop()
@@ -29,6 +30,9 @@ export default class mapComponent extends Component {
                             </TouchableOpacity>
                 </View>
                 <MapView
+                provider={PROVIDER_GOOGLE}
+                customMapStyle={require('./customMapStyle.json')}
+                    showsMyLocationButton={true}
                     initialRegion={{
                         latitude: 23.025836,
                         longitude: 72.503349,
@@ -43,7 +47,7 @@ export default class mapComponent extends Component {
 
                     <Polyline
                         strokeWidth={5}
-                        strokeColor='blue'
+                        strokeColor='rgba(250,144,68,1)'
                         coordinates={
                             [
                                 {
@@ -69,12 +73,12 @@ export default class mapComponent extends Component {
                     </Polyline>
 
                     <Marker
-                        coordinate={{
+                        coordinate={{ 
                             latitude: 23.025836,
                             longitude: 72.503349,
                         }}
                         title='Solution Analysts'
-                        description='ઉકેલ વિશ્લેષકો'
+                        description='Analysing needs, delivering solutions'
                         identifier='1'
                     >
 
